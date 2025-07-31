@@ -1,0 +1,31 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:15
+    container_name: [container_name]
+    restart: always
+    environment:
+      POSTGRES_USER: [username_db]
+      POSTGRES_PASSWORD: [password_db]
+      POSTGRES_DB: [db_name]
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  users:
+    build: ./services/users
+    environment:
+      - DB_HOST=[db_host]
+      - DB_PORT=[db_port]
+      - DB_USER=[db_username]
+      - DB_PASSWORD=[db_password]
+      - DB_NAME={db_name}
+      - JWT_SECRET=[secret_key]
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
