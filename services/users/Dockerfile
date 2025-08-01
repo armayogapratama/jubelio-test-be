@@ -1,6 +1,6 @@
-FROM node:24-alpine
+FROM node:24-alpine AS builder
 
-WORKDIR /
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -8,6 +8,17 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3003
+RUN npm run build
 
-CMD ["node", "app.ts"]
+FROM node:24-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
+
+RUN npm install --omit=dev
+
+EXPOSE 3001
+
+CMD ["node", "dist/app.js"]

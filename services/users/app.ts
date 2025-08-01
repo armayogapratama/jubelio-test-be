@@ -1,5 +1,5 @@
 const fastify = require("fastify");
-const userRouter = require("./routers/user.ts");
+const userRouter = require("./routers/user");
 const cors = require("@fastify/cors");
 const server = fastify();
 
