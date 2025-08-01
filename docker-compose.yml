@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: JDB
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jdb
     ports:
       - "5432:5432"
     volumes:
@@ -16,47 +16,52 @@ services:
   users:
     build: ./services/users
     environment:
-      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/users"
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=jdb
+      - JWT_SECRET=secret
     ports:
       - "3001:3001"
     depends_on:
       - postgres
 
-  products:
-    build: ./services/products
-    environment:
-      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/products"
-    ports:
-      - "3002:3002"
-    depends_on:
-      - postgres
+  # products:
+  #   build: ./services/products
+  #   environment:
+  #     DATABASE_URL: "jdbc://postgres:postgres@postgres:5432/jdb"
+  #   ports:
+  #     - "3002:3002"
+  #   depends_on:
+  #     - postgres
 
-  orders:
-    build: ./services/orders
-    environment:
-      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/orders"
-    ports:
-      - "3003:3003"
-    depends_on:
-      - postgres
+  # orders:
+  #   build: ./services/orders
+  #   environment:
+  #     DATABASE_URL: "jdbc://postgres:postgres@postgres:5432/jdb"
+  #   ports:
+  #     - "3003:3003"
+  #   depends_on:
+  #     - postgres
 
-  payments:
-    build: ./services/payments
-    environment:
-      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/payments"
-    ports:
-      - "3004:3004"
-    depends_on:
-      - postgres
+  # payments:
+  #   build: ./services/payments
+  #   environment:
+  #     DATABASE_URL: "jdbc://postgres:postgres@postgres:5432/jdb"
+  #   ports:
+  #     - "3004:3004"
+  #   depends_on:
+  #     - postgres
 
-  invitations:
-    build: ./services/invitations
-    environment:
-      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/invitations"
-    ports:
-      - "3005:3005"
-    depends_on:
-      - postgres
+  # invitations:
+  #   build: ./services/invitations
+  #   environment:
+  #     DATABASE_URL: "jdbc://postgres:postgres@postgres:5432/jdb"
+  #   ports:
+  #     - "3005:3005"
+  #   depends_on:
+  #     - postgres
 
 volumes:
   postgres_data:

@@ -1,0 +1,29 @@
+{
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "Node16",
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "allowJs": true,
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["**/*", "**/*.js", "**/*.mjs"],
+  "exclude": ["node_modules/**", "dist"]
+}

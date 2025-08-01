@@ -1,4 +1,4 @@
-docker-compose.yml.example
 services/*/.env
 services/*/node_modules
 services/*/package-lock.json
+docker-compose.yml
