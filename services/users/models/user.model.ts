@@ -1,5 +1,5 @@
-import { db } from "../app";
 import nodemailer from "nodemailer";
+import db from "../config/config";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",

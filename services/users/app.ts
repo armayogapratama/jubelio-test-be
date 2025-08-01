@@ -1,11 +1,7 @@
 const fastify = require("fastify");
-const knex = require("knex");
-const knexfile = require("./knexfile");
 const userRouter = require("./routers/user.ts");
 const cors = require("@fastify/cors");
 const server = fastify();
-
-const db = knex(knexfile.development);
 
 server.register(cors, { origin: "*" });
 server.register(userRouter);
@@ -20,5 +16,3 @@ server.listen(
     console.log(`Server running at ${address}`);
   }
 );
-
-module.exports = db;
