@@ -1,17 +1,17 @@
 const fastify = require("fastify");
 const knex = require("knex");
 const knexfile = require("./knexfile");
-const userRouter = require("./routers/user.ts");
+const productRouter = require("./routers/product.ts");
 const cors = require("@fastify/cors");
 const server = fastify();
 
 const db = knex(knexfile.development);
 
 server.register(cors, { origin: "*" });
-server.register(userRouter);
+server.register(productRouter);
 
 server.listen(
-  { port: Number(process.env.PORT) || 3001 },
+  { port: Number(process.env.PORT) || 3002 },
   (err: Error | null, address: string) => {
     if (err) {
       console.error(err);
